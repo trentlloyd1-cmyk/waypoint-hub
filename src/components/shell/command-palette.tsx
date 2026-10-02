@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { Building2, FileUp, Loader2, Moon, Search, UserPlus, UserRound } from "lucide-react";
 import {
+  Command,
   CommandDialog,
   CommandEmpty,
   CommandGroup,
@@ -90,7 +91,8 @@ export function CommandPaletteProvider({ children, nav }: { children: React.Reac
         description="Type a name, email or phone number, or pick an action"
         className="sm:max-w-xl"
       >
-        {/* Results come from the server, so turn off cmdk's own filtering for them. */}
+        {/* Server results always match: their value includes the query, so cmdk's filter keeps them. */}
+        <Command>
         <CommandInput
           value={query}
           onValueChange={setQuery}
@@ -167,6 +169,7 @@ export function CommandPaletteProvider({ children, nav }: { children: React.Reac
             </CommandItem>
           </CommandGroup>
         </CommandList>
+        </Command>
       </CommandDialog>
     </PaletteContext.Provider>
   );

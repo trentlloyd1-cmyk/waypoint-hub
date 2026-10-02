@@ -139,7 +139,7 @@ export function ImportWizard() {
         </CardHeader>
         <CardContent className="space-y-4">
           {summary.skipped.length > 0 && (
-            <div className="max-h-80 overflow-auto rounded-lg border">
+            <div className="max-h-80 overflow-auto rounded-lg border" tabIndex={0} role="region" aria-label="Skipped rows">
               <table className="w-full text-sm">
                 <caption className="sr-only">Rows that were skipped</caption>
                 <thead className="sticky top-0 bg-muted text-left">
@@ -227,7 +227,7 @@ export function ImportWizard() {
           <CardDescription>The first 5 rows, as they&apos;ll be saved.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-5">
-          <div className="overflow-x-auto rounded-lg border">
+          <div className="overflow-x-auto rounded-lg border" tabIndex={0} role="region" aria-label="Import preview">
             <table className="tabular w-full text-sm">
               <caption className="sr-only">Preview of the first 5 rows</caption>
               <thead className="bg-muted text-left">

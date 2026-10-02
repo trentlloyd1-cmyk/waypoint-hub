@@ -33,6 +33,7 @@ export function ContactOrganisationField({
 
   return (
     <OrganisationSelect
+      aria-label="Organisation"
       value={current}
       initialLabel={label}
       onChange={(id, name) =>

@@ -89,7 +89,8 @@ export function FontComparison() {
             </span>
           </Label>
         </RadioGroup>
-        <div className="overflow-x-auto rounded-lg border">
+        {/* Focusable so keyboard users can scroll it sideways on a phone (WCAG 2.1.1). */}
+        <div className="overflow-x-auto rounded-lg border" tabIndex={0} role="region" aria-label="Sample table (scrolls sideways)">
           <table className="tabular w-full text-sm">
             <caption className="sr-only">Sample partner table to compare fonts</caption>
             <thead className="bg-muted text-left">

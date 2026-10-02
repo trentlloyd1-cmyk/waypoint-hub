@@ -13,9 +13,15 @@ export async function GET(request: NextRequest) {
   const type = searchParams.get("type") as EmailOtpType | null;
   const next = safeNextPath(searchParams.get("next"));
 
-  if (tokenHash && type) {
+  const code = searchParams.get("code");
+  if ((tokenHash && type) || code) {
     const supabase = await createClient();
-    const { error } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type });
+    // Our branded emails send token_hash. Supabase's standard emails (used until custom
+    // email sending is set up) come back with a one-time code instead.
+    const { error } =
+      tokenHash && type
+        ? await supabase.auth.verifyOtp({ token_hash: tokenHash, type })
+        : await supabase.auth.exchangeCodeForSession(code!);
     if (!error) {
       await supabase.rpc("write_audit", { p_action: "login", p_entity_type: "auth", p_details: { method: "email_link" } });
       return NextResponse.redirect(new URL(next, origin));

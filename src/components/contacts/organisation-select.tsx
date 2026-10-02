@@ -24,6 +24,8 @@ export function OrganisationSelect({
   initialLabel?: string | null;
   "aria-describedby"?: string;
   "aria-invalid"?: boolean;
+  /** Needed when there's no visible <label htmlFor> pointing at the picker. */
+  "aria-label"?: string;
 }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");

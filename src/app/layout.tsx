@@ -29,7 +29,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <TooltipProvider delayDuration={300}>
             {children}
-            <Toaster position="top-center" richColors closeButton />
+            {/* Plain (not "rich") colours: the rich green/red fail contrast checks. */}
+            <Toaster position="top-center" closeButton />
           </TooltipProvider>
         </ThemeProvider>
       </body>

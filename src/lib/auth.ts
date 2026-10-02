@@ -20,24 +20,24 @@ export type CurrentUser = {
 export const getCurrentUser = cache(async (): Promise<CurrentUser | null> => {
   const supabase = await createClient();
   const { data: claimsData } = await supabase.auth.getClaims();
-  const userId = claimsData?.claims?.sub;
+  const claims = claimsData?.claims;
+  const userId = claims?.sub;
   if (!userId) return null;
 
   const { data: profile } = await supabase.from("profiles").select("*").eq("id", userId).maybeSingle();
   if (!profile || !profile.active) return null;
 
-  const [{ data: aal }, { data: factors }] = await Promise.all([
-    supabase.auth.mfa.getAuthenticatorAssuranceLevel(),
-    supabase.auth.mfa.listFactors(),
-  ]);
+  // The verified token says whether two-step was passed this session.
+  const aal = claims.aal === "aal2" ? "aal2" : "aal1";
+  // If not, ask the auth server whether they have an authenticator set up.
+  // (getUser checks with the server, unlike reading the session cookie directly.)
+  let hasVerifiedFactor = aal === "aal2";
+  if (!hasVerifiedFactor) {
+    const { data } = await supabase.auth.getUser();
+    hasVerifiedFactor = Boolean(data.user?.factors?.some((f) => f.factor_type === "totp" && f.status === "verified"));
+  }
 
-  return {
-    id: userId,
-    email: profile.email,
-    profile,
-    aal: aal?.currentLevel === "aal2" ? "aal2" : "aal1",
-    hasVerifiedFactor: (factors?.totp?.length ?? 0) > 0,
-  };
+  return { id: userId, email: profile.email, profile, aal, hasVerifiedFactor };
 });
 
 /** For pages and actions that need a signed-in person who has passed any required two-factor check. */

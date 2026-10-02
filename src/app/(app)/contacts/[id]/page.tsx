@@ -161,28 +161,26 @@ export default async function ContactPage({ params }: PageProps<"/contacts/[id]"
               <CardTitle className="text-lg">Address</CardTitle>
             </CardHeader>
             <CardContent>
-              <dl className="space-y-3">
-                <div>
+              <dl className="grid grid-cols-[1fr_6rem] gap-x-3 gap-y-3">
+                <div className="col-span-2">
                   <dt className="text-sm font-semibold text-muted-foreground">Street</dt>
                   <dd>
                     <InlineText {...common} field="address_line" label="Street address" value={contact.address_line} />
                   </dd>
                 </div>
-                <div className="grid grid-cols-[1fr_6rem] gap-3">
-                  <div>
-                    <dt className="text-sm font-semibold text-muted-foreground">Suburb</dt>
-                    <dd>
-                      <InlineText {...common} field="suburb" label="Suburb" value={contact.suburb} />
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-sm font-semibold text-muted-foreground">Postcode</dt>
-                    <dd>
-                      <InlineText {...common} field="postcode" label="Postcode" value={contact.postcode} />
-                    </dd>
-                  </div>
+                <div>
+                  <dt className="text-sm font-semibold text-muted-foreground">Suburb</dt>
+                  <dd>
+                    <InlineText {...common} field="suburb" label="Suburb" value={contact.suburb} />
+                  </dd>
                 </div>
                 <div>
+                  <dt className="text-sm font-semibold text-muted-foreground">Postcode</dt>
+                  <dd>
+                    <InlineText {...common} field="postcode" label="Postcode" value={contact.postcode} />
+                  </dd>
+                </div>
+                <div className="col-span-2">
                   <dt className="text-sm font-semibold text-muted-foreground">State</dt>
                   <dd className="mt-1">
                     <InlineSelect

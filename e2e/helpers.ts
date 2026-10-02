@@ -7,7 +7,8 @@ export type TestRole = "Admin" | "Manager" | "Business Development" | "Support S
 export async function signInAs(page: Page, role: TestRole) {
   await page.goto("/login");
   await page.getByRole("region", { name: /test mode/i }).getByRole("button", { name: new RegExp(`^${role}`) }).click();
-  await page.waitForURL("**/today");
+  // The first visit to a page compiles it in development, which can take a while.
+  await page.waitForURL("**/today", { timeout: 60_000 });
   // Close the first-login tour if it appears.
   const skip = page.getByRole("button", { name: /skip the tour|let's go/i });
   if (await skip.isVisible().catch(() => false)) await skip.click();
@@ -15,7 +16,13 @@ export async function signInAs(page: Page, role: TestRole) {
 
 /** Fails the test on any WCAG 2.2 A/AA accessibility violation. */
 export async function expectAccessible(page: Page) {
-  const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"]).analyze();
-  const summary = results.violations.map((v) => `${v.id}: ${v.help} (${v.nodes.length})`);
+  const results = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
+    // The Next.js development-mode badge isn't part of the app.
+    .exclude("nextjs-portal")
+    .analyze();
+  const summary = results.violations.map(
+    (v) => `${v.id}: ${v.help} → ${v.nodes.map((n) => n.target.join(" ")).join(" | ")}`,
+  );
   expect(summary, summary.join("\n")).toEqual([]);
 }

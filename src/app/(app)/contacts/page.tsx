@@ -96,7 +96,7 @@ export default async function ContactsPage({ searchParams }: PageProps<"/contact
                   <td className="block px-4 text-sm text-muted-foreground md:table-cell md:py-3 md:text-base md:text-foreground">
                     {c.organisations?.name}
                   </td>
-                  <td className="tabular block px-4 text-sm md:table-cell md:py-3 md:text-base">
+                  <td className="tabular block px-4 text-sm whitespace-nowrap md:table-cell md:py-3 md:text-base">
                     {formatPhone(c.mobile || c.phone)}
                   </td>
                   <td className="hidden max-w-64 truncate px-4 py-3 lg:table-cell">{c.email}</td>
@@ -152,7 +152,7 @@ export default async function ContactsPage({ searchParams }: PageProps<"/contact
                   <td className="block px-4 text-sm text-muted-foreground md:table-cell md:py-3 md:text-base md:text-foreground">
                     {ORGANISATION_TYPE_LABELS[o.type]}
                   </td>
-                  <td className="tabular block px-4 text-sm md:table-cell md:py-3 md:text-base">{formatPhone(o.phone)}</td>
+                  <td className="tabular block px-4 text-sm whitespace-nowrap md:table-cell md:py-3 md:text-base">{formatPhone(o.phone)}</td>
                   <td className="hidden px-4 py-3 lg:table-cell">{o.suburb}</td>
                   <td className="block px-4 pb-3 md:hidden xl:table-cell xl:py-3">
                     <TagList tags={o.organisation_tags.flatMap((ot) => (ot.tags ? [ot.tags] : []))} />

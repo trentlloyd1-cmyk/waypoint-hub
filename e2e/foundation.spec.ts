@@ -51,9 +51,10 @@ test.describe("contacts", () => {
     await signInAs(page, "Business Development");
     await page.goto("/contacts?q=hendricks");
     await page.getByRole("link", { name: /Priya Hendricks/ }).first().click();
-    await page.getByLabel("Call details").fill("Quick check-in about the footy clinic.");
+    const note = `Quick check-in about the footy clinic (${Date.now()}).`;
+    await page.getByLabel("Call details").fill(note);
     await page.getByRole("button", { name: "Log call" }).click();
-    await expect(page.getByText("Quick check-in about the footy clinic.")).toBeVisible();
+    await expect(page.getByText(note)).toBeVisible();
   });
 
   test("the contacts list is accessible", async ({ page }) => {
