@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en-AU">
+  <body style="margin:0;padding:0;background:#fafaf9;font-family:'Nunito Sans',Avenir,'Segoe UI',Arial,sans-serif;color:#1c1917;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fafaf9;padding:32px 16px;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;background:#ffffff;border:1px solid #e7e5e4;border-radius:16px;padding:32px;">
+            <tr>
+              <td>
+                <img src="{{ .SiteURL }}/brand/waypoint-hub-logo-480.png" width="180" alt="Waypoint Hub" style="display:block;margin-bottom:24px;" />
+                <h1 style="font-size:22px;margin:0 0 12px;">Your sign-in link</h1>
+                <p style="font-size:16px;line-height:1.55;margin:0 0 24px;">Tap the button to sign in to Waypoint Hub. The link works once and expires in an hour.</p>
+                <p style="margin:0 0 24px;">
+                  <a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=email&next=/today"
+                     style="display:inline-block;background:#0f766e;color:#ffffff;text-decoration:none;font-weight:700;font-size:16px;padding:14px 24px;border-radius:10px;">Sign in to Waypoint Hub</a>
+                </p>
+                <p style="font-size:16px;line-height:1.55;margin:0 0 8px;">Or type this code on the sign-in page:</p>
+                <p style="font-size:28px;letter-spacing:6px;font-weight:700;margin:0 0 24px;">{{ .Token }}</p>
+                <p style="font-size:14px;line-height:1.5;color:#57534e;margin:0;">Didn't ask to sign in? You can ignore this email. Nobody can get in without it.</p>
+              </td>
+            </tr>
+          </table>
+          <p style="font-size:12px;color:#57534e;margin:16px 0 0;">Waypoint Connect Pty Ltd · ABN 88 694 131 292 · 32 Huntington St, Clontarf QLD 4019</p>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

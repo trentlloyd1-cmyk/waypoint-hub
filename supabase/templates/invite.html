@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en-AU">
+  <body style="margin:0;padding:0;background:#fafaf9;font-family:'Nunito Sans',Avenir,'Segoe UI',Arial,sans-serif;color:#1c1917;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fafaf9;padding:32px 16px;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;background:#ffffff;border:1px solid #e7e5e4;border-radius:16px;padding:32px;">
+            <tr>
+              <td>
+                <img src="{{ .SiteURL }}/brand/waypoint-hub-logo-480.png" width="180" alt="Waypoint Hub" style="display:block;margin-bottom:24px;" />
+                <h1 style="font-size:22px;margin:0 0 12px;">You're invited to Waypoint Hub</h1>
+                <p style="font-size:16px;line-height:1.55;margin:0 0 24px;">
+                  The Waypoint Connect team has set you up on Waypoint Hub, where we keep track of enquiries, referrals,
+                  partners and community events. Tap below to sign in for the first time.
+                </p>
+                <p style="margin:0 0 24px;">
+                  <a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=invite&next=/today"
+                     style="display:inline-block;background:#0f766e;color:#ffffff;text-decoration:none;font-weight:700;font-size:16px;padding:14px 24px;border-radius:10px;">Accept and sign in</a>
+                </p>
+                <p style="font-size:14px;line-height:1.5;color:#57534e;margin:0;">
+                  The link expires in 24 hours. After that, just go to the sign-in page and ask for a new link with this email address.
+                </p>
+              </td>
+            </tr>
+          </table>
+          <p style="font-size:12px;color:#57534e;margin:16px 0 0;">Waypoint Connect Pty Ltd · ABN 88 694 131 292 · 32 Huntington St, Clontarf QLD 4019</p>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
